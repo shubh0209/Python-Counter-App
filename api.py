@@ -14,7 +14,7 @@ def hello():
 def get_counter():
   global count
   count = count + 1
-  return "<h1> Hi, Welcome to counter</h1> <br/> Counter Value GET in Request: {}".format(count)
+  return "<h1> Hi, Welcome to counter</h1> <br/> Counter Value in GET Request: {}".format(count)
 
 @api.route('/counter', methods=['POST'])
 def add_counter():
@@ -26,7 +26,7 @@ def add_counter():
 def delete_counter():
   global count
   count = count - 1
-  return "<h1> Hi, Welcome to counter</h1> <br/> Counter Value DELETE Request: {}".format(count),200
+  return "<h1> Hi, Welcome to counter</h1> <br/> Counter Value in DELETE Request: {}".format(count),200
 
 @api.route('/info', methods=['GET'])
 def get_info():
