@@ -1,25 +1,40 @@
-from flask import Flask, json
+import flask 
 import git
+import socket
 
-companies = [{"id": 1, "name": "Company One"}, {"id": 2, "name": "Company Two"}]
-count = 1
+count = 0
 
-api = Flask(__name__)
+api = flask.Flask(__name__)
+
+@api.route('/')
+def hello():
+    return flask.redirect('/info')
 
 @api.route('/counter', methods=['GET'])
 def get_counter():
-  #count = count + 1
-  #return json.dumps(companies)
-  return "<h1> Hi, Welcome to counter</h1> <br> {}".format(count)
+  global count
+  count = count + 1
+  return "<h1> Hi, Welcome to counter</h1> <br/> {}".format(count)
+
+@api.route('/counter', methods=['POST'])
+def add_counter():
+  global count
+  count = count + 2
+  return {'count': count}, 200
+
+@api.route('/counter', methods=['DELETE'])
+def delete_counter():
+  global count
+  count = count - 1
+  return {'count': count}, 200
 
 @api.route('/info', methods=['GET'])
 def get_info():
-  #count = count + 1
-  #return json.dumps(companies)
   repo = git.Repo(search_parent_directories=True)
   sha = repo.head.object.hexsha
   branch = repo.active_branch
-  return "<h1> Hi, Welcome to info </h1> <br/> Repo Name : {0} <br/> latest commit hash : {1} <br/> Active branch : {2}".format(repo,sha, branch)
+  hostname = socket.gethostname()
+  return "<h1> Hi, Welcome to info </h1>Latest commit hash : {1} <br/> Active branch : {2} <br/> Hostname : {3}".format(sha, branch, hostname)
 
 
 
