@@ -1,0 +1,22 @@
+{{ if .Values.green.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.flask.name }}-green
+spec:
+  selector:
+    matchLabels:
+      slot: green
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        slot: green
+    spec:
+      containers:
+      - name: {{ .Values.flask.container.name }}-green
+        image: shubh228/flask-app:v2
+        ports:
+        - containerPort: {{ .Values.flask.container.containerPort }}
+{{ end }}
+

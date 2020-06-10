@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.flask.name }}-task6
+  namespace: {{ .Values.target }}
+spec:
+  selector:
+    matchLabels:
+      slot: blue
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        slot: blue
+    spec:
+      containers:
+      - name: {{ .Values.flask.container.name }}-task6
+        image: {{ .Values.flask.container.image }}
+        ports:
+        - containerPort: {{ .Values.flask.container.containerPort }}
+
