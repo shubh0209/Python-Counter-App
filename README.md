@@ -18,10 +18,10 @@ Prerequistes to run app in local environment.
 
 9. The application can be accessed on http://127.0.0.1:5000/
 
-# Scripts:
-init.sh - will build the docker image using git's last commit as tag.
-task7.sh - Will deploy the helm chart to target environment, assuming there are only two targets available (default and prod),
+### Scripts:
+- [init.sh](https://github.com/shubh0209/rakuten-proj/blob/master/init.sh)- will build the docker image using git's last commit as tag.
+- [task7.sh](https://github.com/shubh0209/rakuten-proj/blob/master/task7.sh) - Will deploy the helm chart to target environment, assuming there are only two targets available (default and prod),
            both are namespaces to same cluster.
-task8.sh - Will deploy blue-green deployment, assuming no deployment is running, will start with deploying the older application 
+- [task8.sh](https://github.com/shubh0209/rakuten-proj/blob/master/task8.sh) - Will deploy blue-green deployment, assuming no deployment is running, will start with deploying the older application 
            as running deployment and install the newer version using blue-green strategy.
-changepodcount.sh - Will increase or decrease the no of pods in the blu-green deployment chart.
+- [changepodcount.sh](https://github.com/shubh0209/rakuten-proj/blob/master/changepodcount.sh) - Will increase or decrease the no of pods in the blue-green deployment chart.
