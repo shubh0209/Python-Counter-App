@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.redis.name }}-task6
+  namespace: {{ .Values.target }}
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: {{ .Values.redis.container.name }}-task6
+        image: {{ .Values.redis.container.image }}
+        ports:
+        - containerPort: {{ .Values.redis.container.containerPort }}
+

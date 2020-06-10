@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.flask.name }}-green
+  name: {{ .Values.app.name }}-green
 spec:
   selector:
     matchLabels:
@@ -14,9 +14,9 @@ spec:
         slot: green
     spec:
       containers:
-      - name: {{ .Values.flask.container.name }}-green
-        image: shubh228/flask-app:v2
+      - name: {{ .Values.app.container.name }}-green
+        image: shubh228/flask-app:v3
         ports:
-        - containerPort: {{ .Values.flask.container.containerPort }}
+        - containerPort: {{ .Values.app.container.containerPort }}
 {{ end }}
 

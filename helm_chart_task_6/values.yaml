@@ -1,16 +1,28 @@
 
-replicaCount: 4
+replicaCount: 3
 target: default
-flask:
+app:
   name: flask
   container:
      name: my-flask-app
-     image: shubh228/flask-app:v2
+     image: shubh228/flask-app:v3
      containerPort: 5000
 
-service:
-  type: NodePort
-  port: 5000
-  protocol: TCP
-  name: flask-svc
+redis:
+  name: redis
+  container:
+     name: my-redis
+     image: redis:3.2-alpine
+     containerPort: 6379
 
+appservice:
+    type: NodePort
+    port: 5000
+    protocol: TCP
+    name: flask-svc
+
+redisservice:
+    type: ClusterIP
+    port: 6379
+    protocol: TCP
+    name: redis-lb

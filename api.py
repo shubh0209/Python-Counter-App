@@ -4,7 +4,7 @@ import socket
 import redis
 
 api = flask.Flask(__name__)
-cache = redis.Redis(host='redis-lb', port=6379, password="", decode_responses=True)
+cache = redis.Redis(host='redis-lb', port=6379)
 
 @api.route('/')
 def hello():

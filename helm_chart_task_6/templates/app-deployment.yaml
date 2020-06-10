@@ -1,21 +1,21 @@
-{{ if .Values.blue.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.app.name }}-blue
+  name: {{ .Values.app.name }}-task6
+  namespace: {{ .Values.target }}
 spec:
   selector:
     matchLabels:
-      slot: blue
+      app: flask
   replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
-        slot: blue
+        app: flask
     spec:
       containers:
-      - name: {{ .Values.app.container.name }}-blue
-        image: shubh228/flask-app:v1
+      - name: {{ .Values.app.container.name }}-task6
+        image: {{ .Values.app.container.image }}
         ports:
         - containerPort: {{ .Values.app.container.containerPort }}
-{{ end }}
+
