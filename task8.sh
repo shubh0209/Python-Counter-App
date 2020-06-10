@@ -30,10 +30,3 @@ echo '"Blue green deployment completed, traffic is serving by new deployment."'
 
 echo '============================================================================================='
 
-echo 'Please call the funtion by writing the name "replicacount".'
-
-replicacount () {
-read -p 'Enter the number of pods required: ' count
-number=replicaCount=$count
-helm upgrade counter-app --set $number --reuse-values ./blue-green-deploy-chart-task-8
-}

@@ -1,10 +1,10 @@
-import flask 
+import flask
 import git
 import socket
-
-count = 0
+import redis
 
 api = flask.Flask(__name__)
+cache = redis.Redis(host='redis-lb', port=6379, password="", decode_responses=True)
 
 @api.route('/')
 def hello():
@@ -12,20 +12,17 @@ def hello():
 
 @api.route('/counter', methods=['GET'])
 def get_counter():
-  global count
-  count = count + 1
+  count = cache.incr('count')
   return "<h1> Hi, Welcome to counter</h1> <br/> Counter value in GET Request: {}".format(count)
 
 @api.route('/counter', methods=['POST'])
 def add_counter():
-  global count
-  count = count + 2
+  count = cache.incrby('count', 2)
   return "<h1> Hi, Welcome to counter</h1> <br/> Counter value in POST Request: {}".format(count),200
 
 @api.route('/counter', methods=['DELETE'])
 def delete_counter():
-  global count
-  count = count - 1
+  count = cache.decr('count')
   return "<h1> Hi, Welcome to counter</h1> <br/> Counter value in DELETE Request: {}".format(count),200
 
 @api.route('/info', methods=['GET'])
@@ -40,4 +37,4 @@ def get_info():
 
 
 if __name__ == '__main__':
-    api.run(host="0.0.0.0")
+    api.run(host="0.0.0.0", debug=True)
