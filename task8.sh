@@ -1,6 +1,6 @@
 #!/bin/bash
-
-#Assuming no deployments are running currently, we will start by deploying the app in older version.
+#######Script will only work if there is no chart deployed with name used in script.
+#######Assuming no deployments are running currently, we will start by deploying the app in older version.
 
 helm install counter-app --set blue.enabled=true ./blue-green-deploy-chart-task-8
 
@@ -11,7 +11,7 @@ echo '==========================================================================
 read -p 'Press enter if you want to deploy the newer version of application, for exit hit ctrl+C ' 
 echo '-------------------------------------'
 
-#Launching newer version of app in another-deployment
+#########Launching newer version of app in another-deployment
 
 helm upgrade counter-app --set green.enabled=green --reuse-values ./blue-green-deploy-chart-task-8
 
@@ -22,8 +22,18 @@ echo '==========================================================================
 read -p 'Press enter if you want to switch traffic from blue to green deployment, for exit hit ctrl+C '
 echo '--------------------------------------'
 
-#Switching the traffic from blue to green deployment by changing the label of service.
+#######Switching the traffic from blue to green deployment by changing the label of service.
 
 helm upgrade counter-app --set productionSlot=green --reuse-values ./blue-green-deploy-chart-task-8
 
 echo '"Blue green deployment completed, traffic is serving by new deployment."'
+
+echo '============================================================================================='
+
+echo 'Please call the funtion by writing the name "replicacount".'
+
+replicacount () {
+read -p 'Enter the number of pods required: ' count
+number=replicaCount=$count
+helm upgrade counter-app --set $number --reuse-values ./blue-green-deploy-chart-task-8
+}
