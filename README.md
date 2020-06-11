@@ -1,6 +1,6 @@
-# rakuten-proj
+# Python-Counter-App
 
-Prerequistes to run app in local environment.
+##### Prerequistes to run app in local environment.
 
 1. Python3 should be installed.
 2. Redis server should be running on localhost/remote host.
